@@ -1,10 +1,10 @@
 {
   "name": "nest-postgres-api-starter",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Nest API Starter using TypeORM and Psql",
+  "author": "Cristian Albescu",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "reflect-metadata": "^0.1.13",
