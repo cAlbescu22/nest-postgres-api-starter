@@ -1,25 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
-import CreateUsersDto from '../dto/create-users.dto';
+import { DataSource, Repository } from 'typeorm';
+
 import { User } from '../entities/user.entity';
 
 @Injectable()
-export class UsersRepository {
-  constructor(@InjectRepository(User) private repository: Repository<User>) {
-    repository;
+export class UsersRepository extends Repository<User> {
+  constructor(private readonly dataSource: DataSource) {
+    super(User, dataSource.createEntityManager());
   }
 
   public async list(): Promise<User[]> {
-    return this.repository.find();
-  }
-
-  public async create(dto: CreateUsersDto): Promise<User> {
-    return this.repository.save(dto);
-  }
-
-  public async findByEmail(email: string): Promise<User> {
-    return this.repository.findOne({ email });
+    return this.find();
   }
 }

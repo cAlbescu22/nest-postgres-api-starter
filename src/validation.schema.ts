@@ -8,4 +8,8 @@ export default Joi.object({
   DATABASE_USERNAME: Joi.string().required(),
   DATABASE_PASSWORD: Joi.string().required(),
   DATABASE_NAME: Joi.string().required(),
+
+  SYSTEM_EMAIL: Joi.string().required(),
+  SYSTEM_PASSWORD: Joi.string().required(),
+  RUN_SEED: Joi.string().allow(''),
 });

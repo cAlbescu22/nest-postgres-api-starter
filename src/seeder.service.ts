@@ -24,9 +24,9 @@ export class SeederService {
   }
 
   async systemAccount() {
-    const user: User = await this.usersRepository.findByEmail(
-      process.env.SYSTEM_EMAIL,
-    );
+    const user: User = await this.usersRepository.findOneBy({
+      email: process.env.SYSTEM_EMAIL,
+    });
     if (user) {
       this.logger.verbose('System account already exists');
       return;
@@ -39,7 +39,7 @@ export class SeederService {
       lastName: 'Account',
     };
 
-    await this.usersRepository.create(properties);
+    await this.usersRepository.save(properties);
 
     this.logger.debug('Seeding finished for: system account');
   }
