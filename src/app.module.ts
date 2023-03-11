@@ -1,21 +1,22 @@
-import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-import appConfig from './config/app.config';
-import databaseConfig from './config/database.config';
-import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import validationSchema from './validation.schema';
 import { SeederService } from './seeder.service';
+import { UsersModule } from './users/users.module';
+import appConfig from './config/app.config';
+import authConfig from './config/auth.config';
+import databaseConfig from './config/database.config';
 import seedConfig from './config/seed.config';
+import validationSchema from './validation.schema';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [appConfig, databaseConfig, seedConfig],
+      load: [appConfig, databaseConfig, seedConfig, authConfig],
       validationSchema,
     }),
     TypeOrmModule.forRootAsync({
@@ -29,6 +30,7 @@ import seedConfig from './config/seed.config';
         password: configService.get<string>('database.password'),
         database: configService.get<string>('database.name'),
         entities: [join(__dirname, '**', '*.entity.{ts,js}')],
+        logging: true,
       }),
     }),
     UsersModule,
