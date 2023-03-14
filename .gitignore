@@ -15,6 +15,10 @@ lerna-debug.log*
 # OS
 .DS_Store
 
+# Docker
+data
+.env.prod
+
 # Tests
 /coverage
 /.nyc_output
